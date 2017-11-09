@@ -1,0 +1,46 @@
+﻿<h1>Things</h1>
+
+@if (things == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <span>Number of things: </span>@things.Length<br/>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var thing in things)
+            {
+                <tr @key(thing)>
+                    <td>@thing.name</td>
+                    <td>@thing.description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    Thing[] things;
+
+    override protected async Task InitAsync()
+    {
+        using (var client = new HttpClient())
+        {
+            var json1 = await client.GetStringAsync("/sample-data/things.json");
+            things = JsonUtil.Deserialize<Thing[]>(json1);
+        }
+    }
+
+   class Thing
+    {
+        public string name { get; set; }
+        public string description { get; set; }
+    }
+}
