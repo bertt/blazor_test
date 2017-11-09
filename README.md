@@ -16,3 +16,5 @@ Content root path: /Users/bert/dev/git/bertt/blazor_test/src
 Now listening on: http://localhost:56786
 Application started. Press Ctrl+C to shut down.
 ```
+
+Now in browser go to http://localhost:56786 to open site
